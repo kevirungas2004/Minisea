@@ -1,0 +1,92 @@
+header{
+	background-color: #DCFFB8;
+	width:auto;
+	border-radius: 15px;
+}
+header img{
+	width: 25%;
+}
+/*barra de menu*/
+#menu{
+	background:rgba(255,128,128);
+	border-radius: 15px;
+}
+#menu ul{
+	list-style:none;
+	padding: 5px;
+	margin: 10px;
+}
+#menu ul li{
+	display:inline-block;
+}
+#menu ul li a{
+	color:#ffffff;
+	text-decoration:none;
+	display:block;
+	padding: 10px 25px;
+	border-radius: 15px;
+	margin: 0;
+}
+#menu ul li a:hover{
+	background-color:red;
+}
+
+/*banner*/
+.slider{
+	width: 100%
+	margin:auto;
+	overflow:hidden;
+}
+
+.slider ul{
+	display:flex;
+	padding: 0;
+	width: 400%;
+
+	/*indicaciones de la animación del slider*/
+	animation: cambio 20s infinite;
+	animation-direction:alternate;
+}
+.slider ul li{
+display:list-item;
+}
+.slider li{
+list-style:none;
+width:100%;
+}
+.slider img{
+width: 100%;
+height: 100%;
+}
+
+/*Animation de salider*/
+@keyframes cambio{
+0%{margin-left:0; }
+20%{margin-left:0; }
+
+25%{margin-left:-100%; }
+45%{margin-left:-100%;}
+
+50%{margin-left:-200%; }
+70%{margin-left:-200%; }
+
+75%{margin-left:-300%; }
+100%{margin-left:-300%; }
+}
+/*estilo para el footer*/
+footer{
+border-radius: 15px;
+background-color: #EEFFBB;
+clear:both;
+font:bold 20px 'Arial Narrow';
+}
+footer li{
+display:inline-block;
+padding:15px 15px;
+}
+footer li img{
+width:30px;
+height:30px;
+}
+.item-r{
+float:right;}

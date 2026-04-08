@@ -1,0 +1,22 @@
+h1{
+	font:italic 2em arial;
+	width: 75%;
+	text-align:center;
+	margin: 10px auto;
+	padding: 15px;
+	border-bottom:double purple;
+	color: #8A8E27;
+	text-shadow: 3px 3px 1px pink;
+	font-weight: bold;
+}
+
+img{
+	width: 500px;
+	border-radius: 25px;
+}
+
+p{
+	padding: 15px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #8A8E27;
+}
