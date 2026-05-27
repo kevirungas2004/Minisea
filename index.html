@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="title" content="Perfumería Minisea">
+    <meta name="description" content="Fragancia y Frescura">
+    <link rel="stylesheet" href="estilo3.css" type="text/css">
+    <link rel="stylesheet" href="estilo2.css" type="text/css">
+    <link rel="stylesheet" href="estilo.css" type="text/css">
+    <link rel="stylesheet" href="estilos.css" type="text/css">
+    <title>Perfumería Minisea - Perfumes Árabes</title>
+    <style>
+        /* =========================================
+           ESTILOS GENERALES Y MODERNIZACIÓN
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fdfaf6;
+            padding-top: 70px;
+        }
+
+        /* BARRA DE NAVEGACIÓN SUPERIOR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #4a3728;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        .navbar-brand {
+            color: #d4af37;
+            font-size: 1.4em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .navbar-item a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .navbar-item a:hover, .navbar-item a.active-link {
+            background-color: #d4af37;
+            color: #4a3728;
+        }
+
+        /* CONTENEDORES DE SECCIÓN Y PESTAÑAS */
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 80vh;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-padding {
+            padding: 30px 0;
+            border-bottom: 1px dashed #d4af37;
+        }
+
+        .section-padding:last-of-type {
+            border-bottom: none;
+        }
+
+        /* TÍTULOS Y TEXTO */
+        h1, h2, h3 {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            color: #4a3728;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            color: #d4af37;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .subtitle-main {
+            text-align: center; 
+            font-style: italic; 
+            color: #d4af37;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        p, ul, ol {
+            font-size: 1.05em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Misión y Visión Grid */
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .mv-box {
+            background: #fff;
+            padding: 25px;
+            border-left: 4px solid #d4af37;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* CATÁLOGO DE PRODUCTOS GRID */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212,175,55,0.15);
+        }
+
+        .product-img-wrapper {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            background-color: #f9f9f9;
+        }
+
+        .product-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-info h4 {
+            font-size: 1.15em;
+            color: #4a3728;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .product-desc {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 12px;
+            height: 55px;
+            overflow: hidden;
+        }
+
+        .product-price {
+            display: block;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #4a3728;
+            margin-bottom: 15px;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 10px;
+            background-color: #4a3728;
+            color: #fff;
+            border: 1px solid #4a3728;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .btn-add:hover {
+            background-color: #d4af37;
+            color: #4a3728;
+            border-color: #d4af37;
+        }
+
+        /* UBICACIÓN Y CONTACTO GRID */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .map-container {
+            position: relative;
+            padding-bottom: 75%;
+            height: 0;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* FORMULARIO Y BASE DE DATOS */
+        .db-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #4a3728;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 5px rgba(212,175,55,0.3);
+        }
+
+        .db-table-wrapper {
+            overflow-x: auto;
+            margin-top: 30px;
+        }
+
+        .db-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        .db-table th, .db-table td {
+            border: 1px solid #eee;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .db-table th {
+            background-color: #4a3728;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        .db-table tr:nth-child(even) { background-color: #fcfcfc; }
+
+        /* CONFIGURACIONES DEL SLIDER */
+        .amazingslider-wrapper {
+            display: block;
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 450px;
+            margin: 30px auto;
+            overflow: hidden;
+            border: 8px solid #fff;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            background-color: #000;
+        }
+
+        .amazingslider-slides {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .amazingslider-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .amazingslider-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border: none;
+            margin: 0;
+        }
+
+        .amazingslider-title {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 3px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease 0.3s;
+        }
+
+        .amazingslider-slide.active .amazingslider-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .amazingslider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(212, 175, 55, 0.8);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: background 0.3s, opacity 0.3s;
+            opacity: 0;
+        }
+
+        .amazingslider-wrapper:hover .amazingslider-arrow { opacity: 1; }
+        .amazingslider-arrow:hover { background-color: rgba(160, 130, 40, 1); }
+        .amazingslider-arrow-left { left: 20px; }
+        .amazingslider-arrow-right { right: 20px; }
+
+        .amazingslider-nav {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .amazingslider-nav-item {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 2px solid #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .amazingslider-nav-item.active {
+            background-color: #d4af37;
+            transform: scale(1.2);
+        }
+
+        img.info-img {
+            max-width: 800px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 30px;
+            background: #4a3728;
+            color: white;
+            text-align: center;
+            font-size: 0.95em;
+            border-radius: 4px;
+        }
+
+        footer a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        /* ADAPTABILIDAD MÓVIL */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; padding: 10px; }
+            .navbar-menu { justify-content: center; margin-top: 10px; }
+            body { padding-top: 150px; }
+            .mv-grid, .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="#inicio" class="navbar-brand nav-link">MINISEA</a>
+        <ul class="navbar-menu">
+            <li class="navbar-item"><a href="#inicio" class="nav-link active-link">Inicio</a></li>
+            <li class="navbar-item"><a href="#quienes-somos" class="nav-link">Quiénes Somos</a></li>
+            <li class="navbar-item"><a href="#mision-vision" class="nav-link">Misión y Visión</a></li>
+            <li class="navbar-item"><a href="#catalogo" class="nav-link">Catálogo</a></li>
+            <li class="navbar-item"><a href="#ubicacion" class="nav-link">Ubicación</a></li>
+            <li class="navbar-item"><a href="#sistema" class="nav-link">Docs. Sistema</a></li>
+            <li class="navbar-item"><a href="#contacto" class="nav-link">Contacto y BD</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+
+        <section id="inicio" class="content-section active section-padding">
+            <h1>Perfumería Minisea</h1>
+            <p class="subtitle-main">Descubre el lujo de Oriente en cada gota.</p>
+
+            <div class="amazingslider-wrapper" id="amazing-slider">
+                <button class="amazingslider-arrow amazingslider-arrow-left" id="prev-btn">❮</button>
+                <button class="amazingslider-arrow amazingslider-arrow-right" id="next-btn">❯</button>
+
+                <div class="amazingslider-slides" id="slider-slides">
+                    <div class="amazingslider-slide active">
+                        <img src="https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?auto=format&fit=crop&w=1200&q=80" alt="The One de Dolce & Gabbana">
+                        <div class="amazingslider-title">The One - Dolce & Gabbana</div>
+                    </div>
+                    <div class="amazingslider-slide">
+                        <img src="https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=1200&q=80" alt="Coco Chanel">
+                        <div class="amazingslider-title">Coco Chanel - Elegancia Clásica</div>
+                    </div>
+                    <div class="amazingslider-slide">
+                        <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=1200&q=80" alt="Bleu de Chanel">
+                        <div class="amazingslider-title">Bleu de Chanel - Sofisticación Masculina</div>
+                    </div>
+                    <div class="amazingslider-slide">
+                        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1200&q=80" alt="Coco Noir de Chanel">
+                        <div class="amazingslider-title">Coco Noir - Chanel</div>
+                    </div>
+                </div>
+
+                <div class="amazingslider-nav" id="slider-nav">
+                    <div class="amazingslider-nav-item active" data-slide="0"></div>
+                    <div class="amazingslider-nav-item" data-slide="1"></div>
+                    <div class="amazingslider-nav-item" data-slide="2"></div>
+                    <div class="amazingslider-nav-item" data-slide="3"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quienes-somos" class="content-section section-padding">
+            <h2>Quiénes Somos</h2>
+            <p>En <strong>Perfumería Minisea</strong> somos especialistas en acercarte los secretos aromáticos más profundos y refinados del mundo oriental. Nos dedicamos a la importación y distribución selecta de perfumería árabe auténtica, caracterizada por la alta concentración de aceites esenciales, durabilidad incomparable y notas místicas como el Oud, el Ámbar y el Almizcle.</p>
+            
+            <h3 style="font-size: 1.2em; margin-top: 20px; color: #d4af37;">¿Qué es una perfumería?</h3>
+            <p>Más allá de ser un espacio comercial, una perfumería es un santuario sensorial dedicado al arte del aroma. Es el lugar donde la ciencia, la naturaleza y la estética se unen para resguardar creaciones líquidas capaces de evocar recuerdos, despertar emociones y definir la identidad visual de una persona sin necesidad de palabras.</p>
+
+            <h3 style="font-size: 1.2em; margin-top: 20px; color: #d4af37;">¿Para qué sirven los perfumes árabes?</h3>
+            <p>A diferencia de la perfumería tradicional de occidente, los perfumes árabes se elaboran con bases de aceites puros (aceites esenciales) y resinas naturales en lugar de altas concentraciones de alcohol. Su propósito principal va mucho más allá de "oler bien":</p>
+            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                <li><strong>Fijación y Durabilidad Extrema:</strong> Al estar diseñados originalmente para climas desérticos y cálidos, sirven para mantener su fragancia en la piel durante más de 12 o 24 horas.</li>
+                <li><strong>Proyección Exclusiva:</strong> Sirven para crear un aura o "estela" mística e inolvidable a tu paso.</li>
+                <li><strong>Bienestar y Conexión Espiritual:</strong> En la cultura oriental, el perfume sirve también como un elemento de relajación y meditación.</li>
+            </ul>
+            
+            <div class="video-relacionado" style="text-align: center; margin-top: 30px;">
+                <h3>Conoce más sobre el Arte de la Perfumería Árabe</h3>
+                <div class="contenedor-video" style="margin: 20px 0;">
+                    <iframe width="100%" style="max-width: 560px;" height="315" src="https://www.youtube.com/embed/1biaZ79DoUU?si=ZbIqq89LuMty4tlk"
+                            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section id="mision-vision" class="content-section section-padding">
+            <h2>Presentación de la organización</h2>
+            <div class="mv-grid">
+                <div class="mv-box">
+                    <h3>Misión</h3>
+                    <p>Ofrecemos a nuestros clientes una experiencia sensorial única a través de fragancias exclusivas y asesoría personalizada, realzando su bienestar y estilo de vida.</p>
+                </div>
+                <div class="mv-box">
+                    <h3>Visión</h3>
+                    <p>Convertirnos en la perfumería de referencia en la región, reconocida por la calidad de nuestros productos, la innovación en atención al cliente y el compromiso con la sostenibilidad.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalogo" class="content-section section-padding">
+            <h2>Nuestro Catálogo Exclusivo</h2>
+            <p>Explora nuestras piezas maestras importadas, diseñadas para quienes exigen máxima distinción y fijación.</p>
+            
+            <div class="catalog-grid">
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=500&q=80" alt="Oud Real">
+                    </div>
+                    <div class="product-info">
+                        <h4>Oud Real</h4>
+                        <p class="product-desc">Esencia milenaria amaderada con notas intensas de resina de oud y toques ahumados de sándalo.</p>
+                        <span class="product-price">$1,850 MXN</span>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=500&q=80" alt="Ámbar Profundo">
+                    </div>
+                    <div class="product-info">
+                        <h4>Ámbar Profundo</h4>
+                        <p class="product-desc">Misterio de oriente combinado con cálidas vainillas, especias exóticas y un fondo dulce balsámico.</p>
+                        <span class="product-price">$1,920 MXN</span>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=500&q=80" alt="Musk Precioso">
+                    </div>
+                    <div class="product-info">
+                        <h4>Musk Precioso</h4>
+                        <p class="product-desc">Elegancia pura con sutiles almizcles limpios, flores blancas orientales y un aura empolvada premium.</p>
+                        <span class="product-price">$1,780 MXN</span>
+                        <button class="btn-add">Añadir al carrito</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ubicacion" class="content-section section-padding">
+            <h2>Ubicación e Instalaciones</h2>
+            <div class="contact-grid">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.9870185934573!2d-99.65487732471971!3d19.293817145325965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cd89c687e8fb1d%3A0x6bba8475960098df!2sAv%20Independencia%20107%2C%20Barrio%20de%20Santa%20Clara%2C%2050060%20Toluca+de+Lerdo%2C%20M%C3%A9x.!5e0!3m2!1ses!2smx!4v1710000000000!5m2!1ses!2smx" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div>
+                    <h3>Detalles de Ubicación</h3>
+                    <p><strong>Dirección física:</strong><br>Av Independencia #107, Barrio de Santa Clara, Toluca de Lerdo, México</p>
+                    <p><strong>Horario de atención:</strong><br>De Lunes a Sábado 9:00 am a 5:00 pm</p>
+                    
+                    <h3 style="margin-top: 20px;">Nuestras instalaciones</h3>
+                    <img src="img/insta.png" alt="Interior de la perfumería" class="info-img" style="margin: 10px 0;">
+                </div>
+            </div>
+        </section>
+
+        <section id="sistema" class="content-section section-padding">
+            <h2>Documentación del Sistema y Proyecto</h2>
+
+            <h3>Metas del sistema y del proyecto</h3>
+            <div class="mv-grid">
+                <div>
+                    <h4>Metas del sistema</h4>
+                    <ul style="margin-left: 20px;">
+                        <li>Automatizar el control de inventario, evitando roturas de stock.</li>
+                        <li>Ofrecer una experiencia omnicanal: comprar online y recoger en tienda.</li>
+                        <li>Personalizar recomendaciones basadas en historial y preferencias.</li>
+                        <li>Integrar pasarela de pagos segura.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Metas del proyecto</h4>
+                    <ul style="margin-left: 20px;">
+                        <li>Entregar el sitio web en un plazo de 3 meses.</li>
+                        <li>Capacitar al personal en el uso del panel de administración.</li>
+                        <li>Lograr al menos 100 pedidos mensuales en el primer semestre.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 30px;">Descripción de la organización y sus procesos</h3>
+            <h4 style="color: #d4af37;">Proceso 1: Venta Online</h4>
+            <ol style="margin-left: 20px; margin-bottom: 15px;">
+                <li><strong>Cliente:</strong> Navega por el catálogo, añade productos y procede al checkout.</li>
+                <li><strong>Sistema:</strong> Valida el stock disponible en tiempo real.</li>
+                <li><strong>Administrador:</strong> Revisa pedidos nuevos y genera las guías de envío.</li>
+            </ol>
+
+            <h4 style="color: #d4af37;">Proceso 2: Gestión de Inventario</h4>
+            <ol style="margin-left: 20px; margin-bottom: 15px;">
+                <li><strong>Recepción:</strong> Registro de entrada. Incremento en sistema.</li>
+                <li><strong>Venta:</strong> Descuento automático en web o manual mediante terminal.</li>
+            </ol>
+
+            <h3 style="margin-top: 30px;">Estructura Organizacional y UML</h3>
+            <p><strong>Organigrama de la Empresa:</strong></p>
+            <img src="img/orga.png" alt="Organigrama de la perfumería" class="info-img">
+
+            <p style="margin-top: 20px;"><strong>Diagrama UML del Sistema:</strong></p>
+            <img src="img/UML.png" alt="Diagrama UML del sistema" class="info-img">
+        </section>
+
+        <section id="contacto" class="content-section section-padding">
+            <h2>Contacto y Registro de Clientes</h2>
+            <p>Regístrate en nuestro sistema para recibir información sobre nuevas fragancias y ofertas exclusivas.</p>
+            
+            <div class="db-container">
+                <h3>Formulario de Ingreso (Base de Datos)</h3>
+                <form id="registro-form">
+                    <div class="mv-grid" style="margin-top: 10px;">
+                        <div class="form-group">
+                            <label for="db-nombre">Nombre Completo:</label>
+                            <input type="text" id="db-nombre" required placeholder="Ej. Juan Pérez">
+                        </div>
+                        <div class="form-group">
+                            <label for="db-email">Correo Electrónico:</label>
+                            <input type="email" id="db-email" required placeholder="correo@ejemplo.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="db-direccion">Dirección Física:</label>
+                            <input type="text" id="db-direccion" required placeholder="Calle, Número, Colonia">
+                        </div>
+                        <div class="form-group">
+                            <label for="db-telefono">Número de Teléfono:</label>
+                            <input type="tel" id="db-telefono" required placeholder="Ej. 7291254249">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-add" style="width: auto; padding: 12px 30px; margin-top: 10px;">Guardar Registro</button>
+                </form>
+
+                <h3 style="margin-top: 40px;">Registros Almacenados</h3>
+                <p style="font-size: 0.85em; color: #888;">* Los datos se están guardando localmente simulando una conexión a base de datos (LocalStorage).</p>
+                
+                <div class="db-table-wrapper">
+                    <table class="db-table" id="tabla-registros">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Dirección</th>
+                                <th>Teléfono</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p><strong>Kevin Alexis Carreño Martinez: Vendedor</strong></p>
+        <p>Sucursal en: Av Independencia #107, Barrio de Santa Clara, Toluca de Lerdo, México</p>
+        <p>Teléfonos: +2 14 84 87 | Móvil: <a href="tel:7291254249">7291254249</a></p>
+    </footer>
+
+    <script>
+        /* ==========================================
+           LÓGICA 1: NAVEGACIÓN POR PESTAÑAS (SPA)
+           ========================================== */
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.content-section');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Obtener el ID objetivo
+                const targetId = this.getAttribute('href').substring(1);
+                
+                // Remover la clase activa de todas las secciones y enlaces
+                sections.forEach(sec => sec.classList.remove('active'));
+                navLinks.forEach(nav => nav.classList.remove('active-link'));
+                
+                // Activar la sección objetivo y el botón presionado
+                document.getElementById(targetId).classList.add('active');
+                
+                // Activar todos los enlaces que apunten a este ID
+                document.querySelectorAll(`.nav-link[href="#${targetId}"]`).forEach(n => n.classList.add('active-link'));
+                
+                // Hacer scroll suave hacia arriba
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        /* ==========================================
+           LÓGICA 2: SLIDER DE INICIO
+           ========================================== */
+        const slidesContainer = document.getElementById('slider-slides');
+        const slides = document.querySelectorAll('.amazingslider-slide');
+        const sliderNavItems = document.querySelectorAll('.amazingslider-nav-item');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        function updateSlider(index) {
+            if (index < 0) { currentIndex = totalSlides - 1; } 
+            else if (index >= totalSlides) { currentIndex = 0; } 
+            else { currentIndex = index; }
+
+            slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+            slides.forEach((slide, i) => {
+                if (i === currentIndex) { slide.classList.add('active'); } 
+                else { slide.classList.remove('active'); }
+            });
+
+            sliderNavItems.forEach((item, i) => {
+                if (i === currentIndex) { item.classList.add('active'); } 
+                else { item.classList.remove('active'); }
+            });
+        }
+
+        function nextSlide() { updateSlider(currentIndex + 1); }
+        function prevSlide() { updateSlider(currentIndex - 1); }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        sliderNavItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                updateSlider(index);
+                resetInterval();
+            });
+        });
+
+        function startInterval() { slideInterval = setInterval(nextSlide, 5000); }
+        function resetInterval() { clearInterval(slideInterval); startInterval(); }
+
+        startInterval();
+        document.getElementById('amazing-slider').addEventListener('mouseenter', () => clearInterval(slideInterval));
+        document.getElementById('amazing-slider').addEventListener('mouseleave', startInterval);
+
+        /* ==========================================
+           LÓGICA 3: BASE DE DATOS LOCAL (FORMULARIO)
+           ========================================== */
+        const formRegistro = document.getElementById('registro-form');
+        const tablaBody = document.querySelector('#tabla-registros tbody');
+
+        // Función para cargar registros desde LocalStorage
+        function cargarRegistros() {
+            let bdLocal = JSON.parse(localStorage.getItem('minisea_db')) || [];
+            tablaBody.innerHTML = ''; 
+            
+            if (bdLocal.length === 0) {
+                tablaBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #888;">No hay registros almacenados.</td></tr>';
+                return;
+            }
+
+            bdLocal.forEach((registro, index) => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${registro.nombre}</td>
+                    <td>${registro.email}</td>
+                    <td>${registro.direccion}</td>
+                    <td>${registro.telefono}</td>
+                    <td style="text-align: center;">
+                        <button onclick="eliminarRegistro(${index})" style="background: #a00; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Eliminar</button>
+                    </td>
+                `;
+                tablaBody.appendChild(fila);
+            });
+        }
+
+        // Función para agregar un nuevo registro
+        formRegistro.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nuevoRegistro = {
+                nombre: document.getElementById('db-nombre').value,
+                email: document.getElementById('db-email').value,
+                direccion: document.getElementById('db-direccion').value,
+                telefono: document.getElementById('db-telefono').value
+            };
+
+            let bdLocal = JSON.parse(localStorage.getItem('minisea_db')) || [];
+            bdLocal.push(nuevoRegistro);
+            localStorage.setItem('minisea_db', JSON.stringify(bdLocal));
+
+            formRegistro.reset();
+            cargarRegistros();
+            alert("¡Registro guardado exitosamente en la base de datos!");
+        });
+
+        // Función para eliminar un registro
+        window.eliminarRegistro = function(index) {
+            if(confirm('¿Estás seguro de eliminar este registro?')) {
+                let bdLocal = JSON.parse(localStorage.getItem('minisea_db')) || [];
+                bdLocal.splice(index, 1);
+                localStorage.setItem('minisea_db', JSON.stringify(bdLocal));
+                cargarRegistros();
+            }
+        };
+
+        // Cargar los registros al iniciar la página
+        cargarRegistros();
+
+    </script>
+</body>
+</html>
